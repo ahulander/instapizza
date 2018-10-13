@@ -3,6 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/home';
 import Order from './components/order/order';
 
+function track() {
+    fetch("/metrics", {
+        method: "POST"
+    });
+}
+track();
+
 export default function App() {
     return (
         <Router>

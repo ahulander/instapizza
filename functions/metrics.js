@@ -1,6 +1,6 @@
 const https = require("https");
 
-export function handler(event, context, callback) {
+exports.handler = (event, context, callback) => {
 
     if (event.httpMethod !== "POST") {
         callback(null, {

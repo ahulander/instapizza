@@ -1,6 +1,6 @@
-import fetch from "node-fetch";
+const https = require("https");
 
-exports.handler = async function(event, context, callback) {
+export function handler(event, context, callback) {
 
     if (event.httpMethod !== "POST") {
         callback(null, {
@@ -10,7 +10,22 @@ exports.handler = async function(event, context, callback) {
         return;
     }
 
-    return fetch("https://script.google.com/macros/s/AKfycbyFcpwexGADNSbsQLR9JETVgHNYpNiNoG_V3VWA95Ti3hkcPRQ/exec", {
-        method: "POST",
+    var options = {
+        hostname: "script.google.com",
+        path: "/macros/s/AKfycbyFcpwexGADNSbsQLR9JETVgHNYpNiNoG_V3VWA95Ti3hkcPRQ/exec",
+        method: "POST"
+    };
+    https.request(options, response => {
+        response.on('end', () => {
+            callback(null, {
+                statusCode: 200,
+                body: ''
+            });
+        });
+    }).on("error", (error) => {
+        callback(null, {
+            statusCode: 400,
+            body: ''
+        });
     });
 }

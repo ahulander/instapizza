@@ -4,7 +4,7 @@ import Home from './components/home';
 import Order from './components/order/order';
 
 function track() {
-    fetch("/metrics", {
+    fetch(".netlify/functions/metrics", {
         method: "POST"
     });
 }

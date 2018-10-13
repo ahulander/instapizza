@@ -16,16 +16,14 @@ exports.handler = (event, context, callback) => {
         method: "POST"
     };
     https.request(options, response => {
-        response.on('end', () => {
-            callback(null, {
-                statusCode: 200,
-                body: ''
-            });
+        callback(null, {
+            statusCode: 200,
+            body: ''
         });
     }).on("error", (error) => {
         callback(null, {
             statusCode: 400,
             body: ''
         });
-    });
+    }).end();
 }
